@@ -1,0 +1,18 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDEs
+.idea/
+.vscode/
+
+# Environments
+.env
+.python-version
+
+# Docker
+Dockerfile
+docker-compose.yml
