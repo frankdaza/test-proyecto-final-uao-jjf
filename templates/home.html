@@ -85,7 +85,7 @@
             z-index: 1500
         }
 
-        .bd-mode-toggle,
+        .bd-mode-toggle
         .bi {
             width: 1em;
             height: 1em
@@ -160,36 +160,29 @@
 </div>
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
-        <div>
-            <h3 class="float-md-start mb-0">JJF Corporation</h3>
+        <div><h3 class="float-md-start mb-0">JJF Corporation</h3>
+            <nav class="nav nav-masthead justify-content-center float-md-end"><a
+                    class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a> <a
+                    class="nav-link fw-bold py-1 px-0" href="#">Features</a> <a class="nav-link fw-bold py-1 px-0"
+                                                                                href="/">Cerrar sesión</a></nav>
         </div>
     </header>
-    <main>
-        <h1>Iniciar Sesión</h1>
-
-        <form method="POST" action="/login">
-            <div class="mb-3" style="text-align: left;">
-                <label for="username" class="form-label">Usuario</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario">
-            </div>
-            <div class="mb-3" style="text-align: left;">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" />
+    <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+        <h1>Sube los archivos .xlsx de ventas.</h1>
+        <form method="POST" action="/upload" enctype="multipart/form-data" class="mt-4">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Cargar archivo Excel (.xlsx)</label>
+                <input class="form-control" type="file" id="formFile" name="file" accept=".xlsx">
             </div>
             {% if error %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
+            <div class="alert alert-danger mt-2">{{ error }}</div>
             {% endif %}
-            <button type="submit" class="btn btn-primary w-100">Login</button>
+            {% if success %}
+            <div class="alert alert-success mt-2">{{ success }}</div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary w-100">Subir</button>
         </form>
     </main>
 
-<!--    <button type="button" class="btn btn-primary" href="home.html">Login</button>-->
-
-
-
-    <footer class="mt-auto text-white-50"><p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>,
-        by <a href="https://x.com/mdo" class="text-white">@mdo</a>.</p></footer>
 </div>
 <script src="../static/js/bootstrap.bundle.min.js"></script>
