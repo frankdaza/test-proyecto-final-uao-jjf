@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hola Mundo Flask</title>
+</head>
+<body>
+<h1>Hola desde el frontend 🎉</h1>
+<p id="response">Esperando respuesta del backend...</p>
+
+<script>
+    fetch('/api/hello')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('response').textContent = data.message;
+        })
+        .catch(err => {
+            document.getElementById('response').textContent = "Error al conectar con backend.";
+            console.error(err);
+        });
+</script>
+</body>
+</html>
