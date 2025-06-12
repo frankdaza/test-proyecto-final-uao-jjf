@@ -19,5 +19,4 @@ target/
 Thumbs.db
 
 docker-compose.yaml
-Dockerfile
 HELP.md
