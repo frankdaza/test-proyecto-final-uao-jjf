@@ -12,7 +12,3 @@ __pycache__/
 # Environments
 .env
 .python-version
-
-# Docker
-Dockerfile
-docker-compose.yml
