@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="10">
 
     <title>Dashboard · JJF Corporation</title>
 
@@ -21,13 +22,54 @@
         <nav class="nav nav-masthead">
             <a class="nav-link fw-bold px-3" href="/home">Subir Archivos</a>
             <a class="nav-link fw-bold px-3 active" href="#">Dashboard</a>
-            <a class="nav-link fw-bold px-3" href="#">Features</a>
             <a class="nav-link fw-bold px-3" href="/">Cerrar sesión</a>
         </nav>
     </div>
 </header>
 
 <main class="container-fluid px-5 mt-5">
+
+    <p class="text-center text-warning">Esta página se actualiza automáticamente cada 10 segundos.</p>
+
+    <br>
+
+    <h1 class="text-center mb-4">Conteo de Mascotas</h1>
+
+    <div class="row justify-content-center">
+        {% for row in conteo_animales %}
+        <div class="col-md-3 text-center">
+            <div class="card bg-secondary text-white mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-capitalize">{{ row.animal }}</h5>
+                    <p class="card-text fs-3">{{ row.cantidad }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br><br>
+    <hr>
+
+    <h2 class="text-center mt-5 mb-3">Top Servicios Más Demandados</h2>
+
+    <div class="row justify-content-center">
+        {% for row in servicios_mas_demandados %}
+        <div class="col-md-4 text-center">
+            <div class="card bg-info text-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ row.servicio }}</h5>
+                    <p class="card-text fs-3">{{ row.cantidad }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br><br>
+    <hr>
+    <br><br>
+
     <h1 class="text-center mb-4">Últimos 12 Servicios Agendados</h1>
 
     <div class="table-responsive">
@@ -56,6 +98,8 @@
             </tbody>
         </table>
     </div>
+
+    <br><br><br><br>
 </main>
 
 <script src="../static/js/bootstrap.bundle.min.js"></script>

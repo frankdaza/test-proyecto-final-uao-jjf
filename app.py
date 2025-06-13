@@ -69,18 +69,17 @@ def upload_file():
             }
         )
 
-        return render_template('home.html', success="✅ Archivo subido correctamente a S3.")
+        return render_template('home.html', success="✅ Archivo subido correctamente a S3. Puedes revisar la información en el tab de Dashboard. La información podría tardar hasta un par de minutos en actualizarse.")
 
     except Exception as e:
         print(f"🔥 Error al subir a S3: {e}")
         return render_template('home.html', error="🔥 Error al subir el archivo a S3.")
 
-# Dashboard: últimos 20 servicios agendados
 @app.route('/dashboard')
 def dashboard():
     session = Session()
     try:
-        query = text("""
+        citas_query = text("""
         SELECT
             c.id_cliente,
             c.propietario,
@@ -95,13 +94,37 @@ def dashboard():
         ORDER BY d.fecha_agendamiento DESC
         LIMIT 12
         """)
-        result = session.execute(query).fetchall()
-        return render_template('dashboard.html', citas=result)
+
+        animales_query = text("""
+        SELECT animal, cantidad
+        FROM analitica_animales
+        ORDER BY animal;
+        """)
+
+        servicios_query = text("""
+        SELECT servicio, cantidad
+        FROM analitica_servicios_top
+        ORDER BY cantidad DESC;
+        """)
+
+        citas = session.execute(citas_query).fetchall()
+        conteo_animales = session.execute(animales_query).fetchall()
+        servicios_mas_demandados = session.execute(servicios_query).fetchall()
+
+        return render_template(
+            'dashboard.html',
+            citas=citas,
+            conteo_animales=conteo_animales,
+            servicios_mas_demandados=servicios_mas_demandados
+        )
+
+
     except Exception as e:
         print(f"🔥 Error al consultar la base de datos: {e}")
-        return render_template('dashboard.html', citas=[], error="Error al cargar datos.")
+        return render_template('dashboard.html', citas=[], conteo_animales=[], error="Error al cargar datos.")
     finally:
         session.close()
+
 
 # Ejecutar app
 if __name__ == "__main__":
